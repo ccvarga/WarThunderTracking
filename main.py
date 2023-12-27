@@ -1,10 +1,9 @@
 import time
 import windows_capture as wc
 import cv2 as cv
-import onnxruntime
 import numpy as np
 from ultralytics import YOLO
-from ultralytics import p
+from PIL import Image
 
 #session = onnxruntime.InferenceSession('bestLarge.onnx')
 
@@ -13,16 +12,22 @@ session = YOLO('bestLarge.onnx')
 def custom_frame_handler(frame: wc.Frame, capture_control: wc.CaptureControl):
     start = time.perf_counter()
 
-    screenShot = cv.cvtColor(frame.frame_buffer, cv.COLOR_BGRA2BGR)
+    screenshot = cv.cvtColor(frame.frame_buffer, cv.COLOR_BGRA2BGR)
 
-    result = session.predict(screenShot,imgsz=[1216,1920])
+    res = session.predict(screenshot,imgsz=[1216,1920])[0]
 
-    result = session.plot()
+    res = res.plot(line_width=1)
+    res = res[:, :, ::-1]
+    #res = Image.fromarray(res)
 
-    cv.imshow('tracking', result)
+
+    cv.imshow('tracking', res)
 
     stop = time.perf_counter()
     print("Writing Duration:", (stop - start) * 1000, "ms")
+    if cv.waitKey(1) == ord('q'):
+        capture_control.stop()
+        cv.destroyAllWindows
 
 def custom_closed_handler() -> None:
     pass
