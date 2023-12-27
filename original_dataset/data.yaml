@@ -1,0 +1,13 @@
+train: ../train/images
+val: ../valid/images
+test: ../test/images
+
+nc: 1
+names: ['Target']
+
+roboflow:
+  workspace: cozy-cone
+  project: war-thunder-targeting
+  version: 3
+  license: Public Domain
+  url: https://universe.roboflow.com/cozy-cone/war-thunder-targeting/dataset/3
