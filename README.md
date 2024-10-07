@@ -16,10 +16,11 @@ Method:
   
 
 
+
 Current Situation:
 
   The image recognition model is currently trained and image recognition works. 
   
   Development has been halted because the framerate is too low with my current setup. 
   
-    Offloading image recognition model calculation to the gpu is only supported by AMD cards on linux operating system. I experemented with running two sepate applications, one in a linux virtual machine to take advantage of using the gpu for computing the image recognition, and the other application to run on my Windows OS where the video game is running. Sadly, communication between the two applications with this setup is very difficult, and it would simply be easier for me to get an Nvidia card or wait until AMD supports Windows OS.
+  The problem lies with, offloading image recognition model calculation to the gpu is only supported by AMD cards on linux operating system. I experemented with running two sepate applications, one in a linux virtual machine to take advantage of using the gpu for computing the image recognition, and the other application to run on my Windows OS where the video game is running. Sadly, communication between the two applications with this setup is very difficult, and it would simply be easier for me to get an Nvidia card or wait until AMD supports Windows OS.
